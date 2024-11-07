@@ -4,6 +4,7 @@ import { JobQuerySchemaType } from '@/lib/validators/jobs.validator';
 import useSetQueryParams from '@/hooks/useSetQueryParams';
 
 const PAGE_INCREMENT = 1;
+
 const PaginationPreviousButton = ({
   currentPage,
 }: {
@@ -15,12 +16,13 @@ const PaginationPreviousButton = ({
   return (
     <PaginationPrevious
       onClick={() =>
+        currentPage - PAGE_INCREMENT >= PAGE_INCREMENT &&
         setQueryParams({
           page: (currentPage - PAGE_INCREMENT).toString(),
         })
       }
       className=" border dark:bg-slate-400 dark:bg-opacity-5 dark:text-white text-black bg-slate-600 bg-opacity-15   "
-      aria-disabled={currentPage - PAGE_INCREMENT < PAGE_INCREMENT}
+      //aria-disabled={currentPage - PAGE_INCREMENT < PAGE_INCREMENT}
       role="button"
     />
   );
@@ -39,12 +41,13 @@ const PaginationNextButton = ({
     <PaginationNext
       role="button"
       onClick={() =>
+        currentPage <= totalPages - PAGE_INCREMENT &&
         setQueryParams({
           page: (currentPage + PAGE_INCREMENT).toString(),
         })
       }
       className=" border dark:bg-slate-400 dark:bg-opacity-5 dark:text-white text-black bg-slate-600 bg-opacity-15"
-      aria-disabled={currentPage > totalPages - PAGE_INCREMENT}
+      //aria-disabled={currentPage > totalPages - PAGE_INCREMENT}
     />
   );
 };
